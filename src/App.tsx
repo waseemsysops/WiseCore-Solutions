@@ -137,7 +137,7 @@ export default function App() {
       name: 'Sarah Jenkins',
       role: 'Chief Technology Officer',
       company: 'LogiGlobal Logistics',
-      quote: "WiseCore Solutions completely transformed our legacy supply chain. Their custom cloud architecture reduced our operational downtime by 98% and improved tracking transparency ten-fold. They are a partner in the truest sense.",
+      quote: "DEVCOWISE TECHNOLOGIES completely transformed our legacy supply chain. Their custom cloud architecture reduced our operational downtime by 98% and improved tracking transparency ten-fold. They are a partner in the truest sense.",
       rating: 5,
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
     },
@@ -146,7 +146,7 @@ export default function App() {
       name: 'David Chen',
       role: 'VP of Engineering',
       company: 'FinTech Flow Inc.',
-      quote: "Their cybersecurity audit was the most thorough we have ever experienced. WiseCore did not just hand us a PDF of vulnerabilities; they worked side-by-side with our developers to patch and verify every single gateway.",
+      quote: "Their cybersecurity audit was the most thorough we have ever experienced. DEVCOWISE TECHNOLOGIES did not just hand us a PDF of vulnerabilities; they worked side-by-side with our developers to patch and verify every single gateway.",
       rating: 5,
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
     },
@@ -155,7 +155,7 @@ export default function App() {
       name: 'Elena Rostova',
       role: 'Director of Digital Strategy',
       company: 'RetailSphere Global',
-      quote: "We struggled for years to integrate our regional POS databases. WiseCore built a unified data pipeline and dashboard in record time. Our executive leadership now makes real-time, data-driven inventory adjustments.",
+      quote: "We struggled for years to integrate our regional POS databases. DEVCOWISE TECHNOLOGIES built a unified data pipeline and dashboard in record time. Our executive leadership now makes real-time, data-driven inventory adjustments.",
       rating: 5,
       avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80'
     }
@@ -317,8 +317,8 @@ export default function App() {
   // --- Trigger Downloader for Static Version ---
   const triggerStaticDownload = () => {
     const link = document.createElement('a');
-    link.href = '/wisecore-static.html';
-    link.download = 'wisecore-solutions-static.html';
+    link.href = '/devcowise-technologies-static.html';
+    link.download = 'devcowise-technologies-static.html';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -331,7 +331,7 @@ export default function App() {
       <div className="bg-slate-900 text-slate-200 text-xs py-2 px-4 flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 z-50 sticky top-0 md:relative">
         <div className="flex items-center gap-2">
           <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>WiseCore Solutions Interactive Preview</span>
+          <span>DEVCOWISE TECHNOLOGIES Interactive Preview</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="hidden sm:inline text-slate-400">Need the standalone HTML?</span>
@@ -372,12 +372,12 @@ export default function App() {
             <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2.5 rounded-xl text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
               <Layers className="h-5 w-5" />
             </div>
-            <div>
-              <span className="font-display font-bold text-xl text-white tracking-tight">
-                Wise<span className="text-blue-400">Core</span>
+            <div className="flex flex-col leading-none">
+              <span className="font-display font-bold text-lg text-white tracking-tight">
+                DEVCOWISE
               </span>
-              <span className="block text-[9px] text-slate-400 tracking-widest uppercase font-semibold leading-none -mt-0.5">
-                Solutions
+              <span className="block text-[9px] text-blue-400 tracking-widest uppercase font-semibold leading-none mt-1">
+                TECHNOLOGIES
               </span>
             </div>
           </div>
@@ -445,9 +445,14 @@ export default function App() {
                   <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-lg text-white">
                     <Layers className="h-4 w-4" />
                   </div>
-                  <span className="font-display font-bold text-lg text-white">
-                    Wise<span className="text-blue-400">Core</span>
-                  </span>
+                  <div className="flex flex-col leading-none">
+                    <span className="font-display font-bold text-base text-white tracking-tight">
+                      DEVCOWISE
+                    </span>
+                    <span className="block text-[8px] text-blue-400 tracking-widest uppercase font-semibold leading-none mt-0.5">
+                      TECHNOLOGIES
+                    </span>
+                  </div>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
@@ -493,7 +498,7 @@ export default function App() {
                 Get a Quote
               </button>
               <p className="text-center text-xs text-slate-500 mt-4">
-                © 2026 WiseCore Solutions. All rights reserved.
+                © 2026 DEVCOWISE TECHNOLOGIES. All rights reserved.
               </p>
             </div>
           </div>
@@ -521,7 +526,7 @@ export default function App() {
             </h1>
             
             <p className="text-slate-300 text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              WiseCore Solutions partners with forward-thinking enterprises to design, engineer, and deploy high-performance custom software, cloud strategies, and cybersecurity defenses.
+              DEVCOWISE TECHNOLOGIES partners with forward-thinking enterprises to design, engineer, and deploy high-performance custom software, cloud strategies, and cybersecurity defenses.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4">
@@ -658,13 +663,13 @@ export default function App() {
                 Architecting Modern Enterprise Solutions Since 2014
               </h2>
               <p className="text-slate-600 leading-relaxed text-base sm:text-lg">
-                At WiseCore Solutions, we believe that software should not just solve existing workflows; it should catalyze business innovation. We partner with companies of all sizes to architect custom environments that solve key bottleneck challenges.
+                At DEVCOWISE TECHNOLOGIES, we believe that software should not just solve existing workflows; it should catalyze business innovation. We partner with companies of all sizes to architect custom environments that solve key bottleneck challenges.
               </p>
               <div className="border-l-4 border-blue-600 pl-4 py-1.5 italic text-slate-700 font-medium">
                 "Our mission is to empower companies with cutting-edge digital blueprints, building secure and scalable solutions designed to dominate tomorrow."
               </div>
               <p className="text-slate-600 leading-relaxed">
-                Whether migrating massive database clusters, developing specialized customer-facing web apps, or auditing defensive compliance strategies, WiseCore stands as your dedicated consulting powerhouse.
+                Whether migrating massive database clusters, developing specialized customer-facing web apps, or auditing defensive compliance strategies, DEVCOWISE TECHNOLOGIES stands as your dedicated consulting powerhouse.
               </p>
 
               <div className="pt-4">
@@ -763,7 +768,7 @@ export default function App() {
               Comprehensive Technology Ecosystem
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
-              Explore how WiseCore modernizes operations, secures customer databases, and establishes flexible digital workflows built around your direct corporate goals.
+              Explore how DEVCOWISE TECHNOLOGIES modernizes operations, secures customer databases, and establishes flexible digital workflows built around your direct corporate goals.
             </p>
           </div>
 
@@ -838,7 +843,7 @@ export default function App() {
                 <span>Our Value Advantage</span>
               </div>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
-                Why Industry Leaders Choose WiseCore
+                Why Industry Leaders Choose DEVCOWISE TECHNOLOGIES
               </h2>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                 We blend technical mastery with real-world business consultation. Our team ensures that your project is not just completed, but thrives under rigorous production conditions.
@@ -1147,7 +1152,7 @@ export default function App() {
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-6">
                 <h3 className="font-display font-bold text-xl text-slate-900">
-                  WiseCore Solutions Head Office
+                  DEVCOWISE TECHNOLOGIES Head Office
                 </h3>
                 
                 <div className="space-y-4">
@@ -1185,7 +1190,7 @@ export default function App() {
                     <div>
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Email Inquiry</p>
                       <p className="text-slate-700 text-sm font-medium mt-0.5">
-                        solutions@wisecoretech.com
+                        solutions@devcowise.com
                       </p>
                     </div>
                   </div>
@@ -1226,7 +1231,7 @@ export default function App() {
                       </div>
                     </div>
                     <span className="bg-slate-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow mt-1">
-                      WiseCore
+                      DEVCOWISE TECHNOLOGIES
                     </span>
                   </div>
 
@@ -1377,12 +1382,17 @@ export default function App() {
               <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-lg text-white">
                 <Layers className="h-4 w-4" />
               </div>
-              <span className="font-display font-bold text-lg text-white">
-                Wise<span className="text-blue-400">Core</span>
-              </span>
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-base text-white tracking-tight">
+                  DEVCOWISE
+                </span>
+                <span className="block text-[8px] text-blue-400 tracking-widest uppercase font-semibold leading-none mt-0.5">
+                  TECHNOLOGIES
+                </span>
+              </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              WiseCore Solutions delivers elite enterprise technologies designed to securely modernise digital architectures. We help brands build the systems of tomorrow, today.
+              DEVCOWISE TECHNOLOGIES delivers elite enterprise technologies designed to securely modernise digital architectures. We help brands build the systems of tomorrow, today.
             </p>
             <div className="flex items-center gap-3 pt-2">
               {['Twitter', 'LinkedIn', 'GitHub', 'Medium'].map((social) => (
@@ -1390,7 +1400,7 @@ export default function App() {
                   key={social}
                   href="#"
                   className="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white flex justify-center items-center transition"
-                  aria-label={`WiseCore on ${social}`}
+                  aria-label={`DEVCOWISE TECHNOLOGIES on ${social}`}
                 >
                   <span className="text-[10px] font-bold">{social[0]}</span>
                 </a>
@@ -1441,7 +1451,7 @@ export default function App() {
           {/* Column 4: Newsletter Mock */}
           <div className="space-y-4">
             <h4 className="font-display font-bold text-white text-xs uppercase tracking-wider">
-              WiseCore Newsletter
+              DEVCOWISE TECHNOLOGIES Newsletter
             </h4>
             <p className="text-xs text-slate-400 leading-relaxed">
               Subscribe to stay updated with monthly digital transformation and security briefings.
@@ -1465,7 +1475,7 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
           <p className="text-slate-500 text-center sm:text-left">
-            © 2026 WiseCore Solutions LLC. All rights reserved. Built to specifications in Cloud Native Workspace.
+            © 2026 DEVCOWISE TECHNOLOGIES LLC. All rights reserved. Built to specifications in Cloud Native Workspace.
           </p>
           <div className="flex gap-4 text-slate-500">
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
@@ -1628,7 +1638,7 @@ export default function App() {
               {modalType === 'export' && (
                 <div className="space-y-4">
                   <p className="text-xs text-slate-600 leading-normal">
-                    This website is pre-bundled as a single self-contained HTML file called <code className="bg-slate-100 px-1 py-0.5 rounded text-blue-600 font-mono text-[11px]">wisecore-static.html</code>. It embeds all Inter and Poppins font assets, Lucide icons, full custom Tailwind style sheets, interactive sliders, scroll logic, animated numbers, and form error checkers completely offline.
+                    This website is pre-bundled as a single self-contained HTML file called <code className="bg-slate-100 px-1 py-0.5 rounded text-blue-600 font-mono text-[11px]">devcowise-technologies-static.html</code>. It embeds all Inter and Poppins font assets, Lucide icons, full custom Tailwind style sheets, interactive sliders, scroll logic, animated numbers, and form error checkers completely offline.
                   </p>
 
                   <div className="bg-slate-900 rounded-xl p-4 text-xs font-mono text-slate-200 overflow-x-auto max-h-56">
@@ -1637,7 +1647,7 @@ export default function App() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiseCore Solutions | Enterprise IT Consulting & Custom Software</title>
+    <title>DEVCOWISE TECHNOLOGIES | Enterprise IT Consulting & Custom Software</title>
     <!-- Google Fonts & Tailwind CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1663,7 +1673,7 @@ export default function App() {
                       className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-xl shadow flex items-center gap-1.5 text-xs transition cursor-pointer"
                     >
                       <Download className="h-4 w-4" />
-                      <span>Download wisecore-static.html</span>
+                      <span>Download devcowise-technologies-static.html</span>
                     </button>
                     <button
                       onClick={() => setIsModalOpen(false)}
