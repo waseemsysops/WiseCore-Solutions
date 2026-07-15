@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiseCore Solutions | Enterprise IT Consulting & Custom Software</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons Library CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration for customized theme variables matching guidelines -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0B1F3A',
+                            accent: '#2E86FF',
+                            accentHover: '#1B6FD1',
+                            darkGray: '#1E293B',
+                            lightGray: '#F8FAFC',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1F3A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 5px;
+            border: 2px solid #0B1F3A;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2E86FF;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- 1. STICKY NAVBAR -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-900 py-5 border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            
+            <!-- Logo Section -->
+            <a href="#home" class="flex items-center gap-2 group">
+                <div class="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2.5 rounded-xl text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    <i data-lucide="layers" class="h-5 w-5"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-xl text-white tracking-tight">
+                        Wise<span class="text-blue-400">Core</span>
+                    </span>
+                    <span class="block text-[9px] text-slate-400 tracking-widest uppercase font-semibold leading-none -mt-0.5">
+                        Solutions
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link font-medium text-sm transition-colors text-blue-400 relative py-1" onclick="setActiveLink(this)">Home</a>
+                <a href="#about" class="nav-link font-medium text-sm transition-colors text-slate-300 hover:text-white relative py-1" onclick="setActiveLink(this)">About</a>
+                <a href="#services" class="nav-link font-medium text-sm transition-colors text-slate-300 hover:text-white relative py-1" onclick="setActiveLink(this)">Services</a>
+                <a href="#whyus" class="nav-link font-medium text-sm transition-colors text-slate-300 hover:text-white relative py-1" onclick="setActiveLink(this)">Why Us</a>
+                <a href="#testimonials" class="nav-link font-medium text-sm transition-colors text-slate-300 hover:text-white relative py-1" onclick="setActiveLink(this)">Testimonials</a>
+                <a href="#contact" class="nav-link font-medium text-sm transition-colors text-slate-300 hover:text-white relative py-1" onclick="setActiveLink(this)">Contact</a>
+            </nav>
+
+            <!-- CTA / Get Quote Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="openModal('quote')" class="hidden sm:inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs px-4 py-2.5 rounded-lg shadow-md hover:shadow-blue-500/10 transition duration-200">
+                    <i data-lucide="sparkles" class="h-3.5 w-3.5"></i>
+                    <span>Get a Quote</span>
+                </button>
+
+                <!-- Mobile Hamburger Menu Icon -->
+                <button onclick="toggleMobileMenu()" class="p-2 text-slate-300 hover:text-white md:hidden hover:bg-slate-800 rounded-lg transition" aria-label="Toggle Menu">
+                    <i id="hamburger-icon" data-lucide="menu" class="h-6 w-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Sidebar Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden">
+        <div class="fixed right-0 top-0 bottom-0 w-4/5 max-w-sm bg-slate-900 p-6 shadow-2xl flex flex-col justify-between border-l border-slate-800">
+            <div>
+                <div class="flex justify-between items-center mb-8 border-b border-slate-800 pb-4">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-lg text-white">
+                            <i data-lucide="layers" class="h-4 w-4"></i>
+                        </div>
+                        <span class="font-display font-bold text-lg text-white">
+                            Wise<span class="text-blue-400">Core</span>
+                        </span>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-md transition">
+                        <i data-lucide="x" class="h-5 w-5"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <a href="#home" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">Home</a>
+                    <a href="#about" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">About Us</a>
+                    <a href="#services" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">Our Services</a>
+                    <a href="#whyus" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">Why Choose Us</a>
+                    <a href="#testimonials" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">Client Reviews</a>
+                    <a href="#contact" onclick="closeMobileMenu()" class="text-slate-300 hover:bg-slate-800/50 hover:text-white font-medium text-base py-2.5 px-4 rounded-lg transition-colors">Contact Us</a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6">
+                <button onclick="closeMobileMenu(); openModal('quote')" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl shadow-lg transition">
+                    Get a Quote
+                </button>
+                <p class="text-center text-xs text-slate-500 mt-4">
+                    © 2026 WiseCore Solutions. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. HERO SECTION -->
+    <section id="home" class="relative bg-slate-900 text-white pt-24 pb-20 md:py-32 overflow-hidden border-b border-slate-800">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#2e86ff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+        
+        <!-- Ambient decorative blurs -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-40 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Copy -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full text-blue-400 text-xs font-semibold uppercase tracking-wider">
+                    <i data-lucide="sparkles" class="h-3.5 w-3.5 text-blue-400"></i>
+                    <span>Innovating Digital Excellence</span>
+                </div>
+                
+                <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+                    Smart Solutions for a <span class="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent animate-pulse">Smarter Business</span>
+                </h1>
+                
+                <p class="text-slate-300 text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    WiseCore Solutions partners with forward-thinking enterprises to design, engineer, and deploy high-performance custom software, cloud strategies, and cybersecurity defenses.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4">
+                    <a href="#contact" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all">
+                        <span>Get Started</span>
+                        <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                    <a href="#about" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 hover:border-slate-600 font-semibold px-8 py-4 rounded-xl transition duration-200">
+                        <span>Learn More</span>
+                    </a>
+                </div>
+
+                <!-- Capabilities Highlights -->
+                <div class="pt-8 border-t border-slate-800/60 max-w-md mx-auto lg:mx-0">
+                    <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold text-center lg:text-left mb-3">
+                        Proven Capabilities In
+                    </p>
+                    <div class="flex justify-center lg:justify-start gap-4 text-xs font-medium text-slate-400">
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="check" class="h-3.5 w-3.5 text-blue-400"></i> AWS / Cloud
+                        </span>
+                        <span class="text-slate-700">|</span>
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="check" class="h-3.5 w-3.5 text-blue-400"></i> Web & Mobile
+                        </span>
+                        <span class="text-slate-700">|</span>
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="check" class="h-3.5 w-3.5 text-blue-400"></i> Security
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero SVG Diagram Illustration -->
+            <div class="lg:col-span-5 flex justify-center items-center">
+                <div class="relative w-full max-w-md lg:max-w-none aspect-square">
+                    <div class="absolute inset-0 border border-blue-500/10 rounded-full animate-[spin_40s_linear_infinite]"></div>
+                    <div class="absolute inset-4 border border-cyan-400/5 border-dashed rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+                    <div class="absolute top-1/4 left-1/4 right-1/4 bottom-1/4 bg-blue-600/30 rounded-full blur-3xl animate-pulse"></div>
+
+                    <svg viewBox="0 0 500 500" class="w-full h-full relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="250" cy="250" r="75" fill="url(#coreGrad)" />
+                        
+                        <!-- Connection lines -->
+                        <path d="M 250,250 L 120,150" stroke="#2E86FF" stroke-width="2" stroke-dasharray="6 4" />
+                        <path d="M 250,250 L 380,150" stroke="#00D2FF" stroke-width="2" />
+                        <path d="M 250,250 L 350,370" stroke="#2E86FF" stroke-width="2" stroke-dasharray="6 4" />
+                        <path d="M 250,250 L 150,370" stroke="#00D2FF" stroke-width="2" />
+
+                        <!-- Node 1 -->
+                        <g transform="translate(120, 150)">
+                            <circle r="36" fill="#0B1F3A" stroke="#2E86FF" stroke-width="2" />
+                            <circle r="30" fill="url(#blueGrad)" />
+                            <path d="M-10 4 C-10 1, -5 -4, 0 -4 C2 -4, 4 -3, 5 -1 C6 -3, 9 -3, 10 -1 C12 -1, 13 1, 13 3 C13 6, 11 8, 8 8 L-8 8 C-10 8, -10 6, -10 4 Z" fill="white" />
+                        </g>
+
+                        <!-- Node 2 -->
+                        <g transform="translate(380, 150)">
+                            <circle r="36" fill="#0B1F3A" stroke="#00D2FF" stroke-width="2" />
+                            <circle r="30" fill="url(#tealGrad)" />
+                            <path d="M-6 -10 L6 -10 L8 -2 C8 4, 3 9, 0 11 C-3 9, -8 4, -8 -2 Z" fill="white" transform="scale(0.75)" />
+                        </g>
+
+                        <!-- Node 3 -->
+                        <g transform="translate(350, 370)">
+                            <circle r="36" fill="#0B1F3A" stroke="#2E86FF" stroke-width="2" />
+                            <circle r="30" fill="url(#blueGrad)" />
+                            <path d="M-10 8 L-10 -2 L-6 -2 L-6 8 Z M-2 8 L-2 -8 L2 -8 L2 8 Z M6 8 L6 2 L10 2 L10 8 Z" fill="white" transform="scale(0.75)" />
+                        </g>
+
+                        <!-- Node 4 -->
+                        <g transform="translate(150, 370)">
+                            <circle r="36" fill="#0B1F3A" stroke="#00D2FF" stroke-width="2" />
+                            <circle r="30" fill="url(#tealGrad)" />
+                            <path d="M-8 -5 L-13 0 L-8 5 M8 -5 L13 0 L8 5 M-2 8 L2 -8" stroke="white" stroke-width="2" stroke-linecap="round" transform="scale(0.75)" />
+                        </g>
+
+                        <defs>
+                            <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1E3A8A" />
+                                <stop offset="100%" stop-color="#00D2FF" />
+                            </linearGradient>
+                            <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#1E40AF" />
+                                <stop offset="100%" stop-color="#2E86FF" />
+                            </linearGradient>
+                            <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0F766E" />
+                                <stop offset="100%" stop-color="#00D2FF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ABOUT US SECTION -->
+    <section id="about" class="py-20 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Narrative & Brand Mission -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                        <span>Who We Are</span>
+                    </div>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+                        Architecting Modern Enterprise Solutions Since 2014
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base sm:text-lg">
+                        At WiseCore Solutions, we believe that software should not just solve existing workflows; it should catalyze business innovation. We partner with companies of all sizes to architect custom environments that solve key bottleneck challenges.
+                    </p>
+                    <div class="border-l-4 border-blue-600 pl-4 py-1.5 italic text-slate-700 font-medium">
+                        "Our mission is to empower companies with cutting-edge digital blueprints, building secure and scalable solutions designed to dominate tomorrow."
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">
+                        Whether migrating massive database clusters, developing specialized customer-facing web apps, or auditing defensive compliance strategies, WiseCore stands as your dedicated consulting powerhouse.
+                    </p>
+
+                    <div class="pt-4">
+                        <a href="#services" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-500 font-bold text-sm tracking-wide uppercase group">
+                            <span>Explore our capabilities</span>
+                            <i data-lucide="arrow-right" class="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Animated Counters Statistics Block -->
+                <div class="lg:col-span-5">
+                    <div id="stats-container" class="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:15px_15px] pointer-events-none"></div>
+                        <div class="absolute -bottom-20 -right-20 w-48 h-48 rounded-full bg-blue-600/35 blur-3xl pointer-events-none"></div>
+
+                        <div class="relative z-10 grid grid-cols-2 gap-x-8 gap-y-10">
+                            <!-- Stat 1 -->
+                            <div class="space-y-1.5">
+                                <p id="counter-years" class="font-display font-bold text-4xl sm:text-5xl text-blue-400" data-target="12">
+                                    0
+                                </p>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                                    Years Experience
+                                </p>
+                                <p class="text-slate-500 text-[11px] leading-tight">
+                                    In enterprise solutions
+                                </p>
+                            </div>
+
+                            <!-- Stat 2 -->
+                            <div class="space-y-1.5">
+                                <p id="counter-projects" class="font-display font-bold text-4xl sm:text-5xl text-cyan-400" data-target="350">
+                                    0
+                                </p>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                                    Projects Built
+                                </p>
+                                <p class="text-slate-500 text-[11px] leading-tight">
+                                    Delivered successfully
+                                </p>
+                            </div>
+
+                            <!-- Stat 3 -->
+                            <div class="space-y-1.5">
+                                <p id="counter-clients" class="font-display font-bold text-4xl sm:text-5xl text-blue-400" data-target="180">
+                                    0
+                                </p>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                                    Active Clients
+                                </p>
+                                <p class="text-slate-500 text-[11px] leading-tight">
+                                    Global trust and loyalty
+                                </p>
+                            </div>
+
+                            <!-- Stat 4 -->
+                            <div class="space-y-1.5">
+                                <p id="counter-countries" class="font-display font-bold text-4xl sm:text-5xl text-cyan-400" data-target="15">
+                                    0
+                                </p>
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                                    Countries Served
+                                </p>
+                                <p class="text-slate-500 text-[11px] leading-tight">
+                                    Providing localized service
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-slate-800 flex items-center gap-3">
+                            <i data-lucide="award" class="h-5 w-5 text-yellow-500 shrink-0"></i>
+                            <p class="text-xs text-slate-300 font-medium">
+                                Certified Partner with Google Cloud & AWS networks
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICES SECTION -->
+    <section id="services" class="py-20 bg-slate-50 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span>What We Provide</span>
+                </div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+                    Comprehensive Technology Ecosystem
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Explore how WiseCore modernizes operations, secures customer databases, and establishes flexible digital workflows built around your direct corporate goals.
+                </p>
+            </div>
+
+            <!-- Services 6 Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="code" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Custom Software Development
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Tailor-made, robust applications engineered to solve your specific business challenges and streamline operations.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Enterprise Web Applications</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Mobile App Development</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'custom-software')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Enterprise</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="cloud" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Cloud Solutions & DevOps
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Accelerate agility and reduce costs with seamless cloud migrations, optimization, and robust automation pipelines.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Cloud Migration Strategy</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Kubernetes Containerization</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'cloud-solutions')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Enterprise</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="laptop" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Strategic IT Consulting
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Align your technology infrastructure with long-term business objectives to drive efficiency and sustainable growth.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Digital Transformation Maps</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Infrastructure Audit & Tech ROI</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'it-consulting')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Consulting</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="shield" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Cybersecurity & Compliance
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Protect your valuable digital assets, customer trust, and operational integrity with top-tier security standards.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Threat Detection & Response</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>SOC2 & Compliance Audits</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'cybersecurity')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Enterprise</span>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="bar-chart-3" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Data Analytics & Business Intelligence
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Turn raw datasets into predictive insights, dynamic dashboards, and actionable business intelligence.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Data Engineering & Pipelines</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Interactive Tableau Dashboards</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'data-analytics')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Data Core</span>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-xl hover:border-blue-500/20 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center justify-center p-3.5 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i data-lucide="globe" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Digital Transformation
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Modernize legacy processes, digitize customer touchpoints, and cultivate a highly resilient digital core.
+                        </p>
+                        <ul class="space-y-2 pt-2">
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Business Process Automation</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-xs text-slate-500 font-medium">
+                                <i data-lucide="check" class="h-3.5 w-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                                <span>Customer Experience Digitization</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openModal('quote', 'digital-transformation')" class="text-xs text-blue-600 hover:text-blue-500 font-semibold flex items-center gap-1 hover:underline">
+                            <span>Inquire service</span>
+                            <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                        </button>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md">Operations</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. WHY CHOOSE US SECTION -->
+    <section id="whyus" class="py-20 bg-slate-900 text-white relative overflow-hidden reveal">
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:25px_25px] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Sidebar context info -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                        <span>Our Value Advantage</span>
+                    </div>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Why Industry Leaders Choose WiseCore
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        We blend technical mastery with real-world business consultation. Our team ensures that your project is not just completed, but thrives under rigorous production conditions.
+                    </p>
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-emerald-500/10 text-emerald-400 p-1.5 rounded-md shrink-0">
+                                <i data-lucide="check" class="h-4 w-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-white">99.2% Client Retention Rate</h4>
+                                <p class="text-xs text-slate-400">Based on multi-year contract renewals.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-emerald-500/10 text-emerald-400 p-1.5 rounded-md shrink-0">
+                                <i data-lucide="check" class="h-4 w-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm text-white">SLA-Guaranteed Delivery</h4>
+                                <p class="text-xs text-slate-400">On-time delivery benchmarks backed by formal SLA.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Blocks Grid -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-800 hover:border-slate-700/60 p-6 rounded-2xl transition duration-300 space-y-4">
+                        <div class="inline-flex justify-center items-center p-3 rounded-xl bg-blue-500/10 text-blue-400">
+                            <i data-lucide="users" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-base sm:text-lg text-white">
+                            Expert-Only Team
+                        </h3>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            We don't assign junior developers to your account. Your project is led exclusively by senior engineers with 8+ years of field experience.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-800 hover:border-slate-700/60 p-6 rounded-2xl transition duration-300 space-y-4">
+                        <div class="inline-flex justify-center items-center p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                            <i data-lucide="award" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-base sm:text-lg text-white">
+                            Proven Track Record
+                        </h3>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Over 350 enterprise integrations successfully deployed globally, spanning finance, logistics, retail, and tech-driven startups.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-800 hover:border-slate-700/60 p-6 rounded-2xl transition duration-300 space-y-4">
+                        <div class="inline-flex justify-center items-center p-3 rounded-xl bg-blue-500/10 text-blue-400">
+                            <i data-lucide="headphones" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-base sm:text-lg text-white">
+                            24/7 Dedicated Support
+                        </h3>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Our system operations team is on call round-the-clock, ensuring that server downtime is instantly triaged and corrected within minutes.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-800 hover:border-slate-700/60 p-6 rounded-2xl transition duration-300 space-y-4">
+                        <div class="inline-flex justify-center items-center p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                            <i data-lucide="zap" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="font-display font-semibold text-base sm:text-lg text-white">
+                            Scalable Architectures
+                        </h3>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            We write code ready for heavy usage. Every framework we construct is designed to adapt, scale up, and handle spiking query volumes.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. HOW WE WORK PROCESS TIMELINE -->
+    <section class="py-20 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span>Operational Blueprint</span>
+                </div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+                    Our Structured Path to Success
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    We leverage an iterative, highly transparent pipeline format that keeps you informed and in full control through every delivery milestone.
+                </p>
+            </div>
+
+            <!-- Steps timeline -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Connect line -->
+                <div class="hidden md:block absolute top-[44px] left-[12%] right-[12%] h-[2px] bg-slate-200 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="space-y-4 text-center md:text-left relative z-10 group">
+                    <div class="mx-auto md:mx-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white font-bold transition duration-300 shadow-md">
+                        01
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">Discover</h3>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed pr-2">
+                        We conduct intensive initial workshops to map out user stories, audit current technological pain points, and detail all final functional scopes.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="space-y-4 text-center md:text-left relative z-10 group">
+                    <div class="mx-auto md:mx-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white font-bold transition duration-300 shadow-md">
+                        02
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">Plan</h3>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed pr-2">
+                        Our architects generate interactive wireframes, select modular dependencies, and formulate structured security pipelines and sprint budgets.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="space-y-4 text-center md:text-left relative z-10 group">
+                    <div class="mx-auto md:mx-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white font-bold transition duration-300 shadow-md">
+                        03
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">Build</h3>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed pr-2">
+                        Senior developers write clean, responsive typescript code. We run continuous QA validation, code reviews, and end-to-end integration tests.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="space-y-4 text-center md:text-left relative z-10 group">
+                    <div class="mx-auto md:mx-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white font-bold transition duration-300 shadow-md">
+                        04
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">Deliver</h3>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed pr-2">
+                        We migrate production clusters seamlessly under zero-downtime guidelines, transitioning internal workforces with hands-on technical training.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. TESTIMONIALS CAROUSEL -->
+    <section id="testimonials" class="py-20 bg-[#F8FAFC] border-t border-b border-slate-200/50 overflow-hidden reveal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center space-y-4 mb-12">
+                <div class="inline-flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span>Client Reviews</span>
+                </div>
+                <h2 class="font-display font-bold text-3xl text-slate-900 tracking-tight">What Our Partners Say</h2>
+            </div>
+
+            <!-- Slide Box Card -->
+            <div class="relative bg-white border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-md relative">
+                
+                <span class="absolute top-6 left-8 text-8xl text-slate-100 font-serif leading-none select-none pointer-events-none">“</span>
+
+                <div class="relative z-10 space-y-6">
+                    <!-- Rating Stars -->
+                    <div class="flex gap-1 justify-center sm:justify-start">
+                        <i data-lucide="star" class="h-5 w-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="h-5 w-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="h-5 w-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="h-5 w-5 fill-yellow-400 text-yellow-400"></i>
+                        <i data-lucide="star" class="h-5 w-5 fill-yellow-400 text-yellow-400"></i>
+                    </div>
+
+                    <!-- Quote text dynamic placeholder -->
+                    <blockquote id="quote-text" class="text-slate-700 text-base sm:text-lg sm:leading-relaxed font-normal italic text-center sm:text-left transition-all duration-300">
+                        "WiseCore Solutions completely transformed our legacy supply chain. Their custom cloud architecture reduced our operational downtime by 98% and improved tracking transparency ten-fold. They are a partner in the truest sense."
+                    </blockquote>
+
+                    <!-- Author dynamic placeholder -->
+                    <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-slate-100">
+                        <img id="quote-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Sarah Jenkins" class="w-12 h-12 rounded-full object-cover border-2 border-blue-500">
+                        <div class="text-center sm:text-left">
+                            <h4 id="quote-author" class="font-display font-bold text-slate-900 text-sm sm:text-base">Sarah Jenkins</h4>
+                            <p id="quote-role" class="text-slate-500 text-xs font-medium">Chief Technology Officer — <span class="text-blue-600 font-semibold">LogiGlobal Logistics</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav indicators -->
+                <div class="flex justify-between items-center mt-8 sm:mt-0 sm:absolute sm:bottom-12 sm:right-12 gap-3 z-20">
+                    <button onclick="prevTestimonial()" class="bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 p-2.5 rounded-full transition duration-200">
+                        <i data-lucide="chevron-left" class="h-4 w-4"></i>
+                    </button>
+                    <button onclick="nextTestimonial()" class="bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 p-2.5 rounded-full transition duration-200">
+                        <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Dots -->
+            <div class="flex justify-center gap-2 mt-6">
+                <button onclick="jumpToTestimonial(0)" id="dot-0" class="h-2.5 w-8 bg-blue-600 rounded-full transition-all"></button>
+                <button onclick="jumpToTestimonial(1)" id="dot-1" class="h-2.5 w-2.5 bg-slate-300 rounded-full transition-all"></button>
+                <button onclick="jumpToTestimonial(2)" id="dot-2" class="h-2.5 w-2.5 bg-slate-300 rounded-full transition-all"></button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. CALL TO ACTION BANNER -->
+    <section class="py-16 bg-blue-600 text-white relative overflow-hidden reveal">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-blue-900/35 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10 space-y-6">
+            <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-white">
+                Ready to Accelerate Your Digital Blueprints?
+            </h2>
+            <p class="text-blue-100 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+                Schedule a diagnostic workshop with our systems consultants. We'll identify architectural bottlenecks and build an actionable proof of concept.
+            </p>
+            <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="openModal('quote')" class="w-full sm:w-auto bg-white hover:bg-slate-100 text-blue-600 font-bold px-8 py-4 rounded-xl shadow-lg transition">
+                    Get a Free Consultation
+                </button>
+                <a href="#contact" class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white border border-blue-500 font-bold px-8 py-4 rounded-xl transition text-center">
+                    Speak to an Expert
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span>Connect with us</span>
+                </div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+                    Start Your Digital Project Today
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Submit details about your workflow goals, or schedule an in-person meeting at our global regional office headquarters.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left Info Details & Map Mock -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-6">
+                        <h3 class="font-display font-bold text-xl text-slate-900">
+                            WiseCore Solutions Head Office
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Detail item 1 -->
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-50 text-blue-600 p-2.5 rounded-lg shrink-0">
+                                    <i data-lucide="map-pin" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Address</p>
+                                    <p class="text-slate-700 text-sm font-medium mt-0.5">
+                                        Suite 400, 100 Innovation Parkway, Silicon Valley, CA 94025
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Detail item 2 -->
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-50 text-blue-600 p-2.5 rounded-lg shrink-0">
+                                    <i data-lucide="phone" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Call directly</p>
+                                    <p class="text-slate-700 text-sm font-medium mt-0.5">
+                                        +1 (800) 555-WISE (9473)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Detail item 3 -->
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-50 text-blue-600 p-2.5 rounded-lg shrink-0">
+                                    <i data-lucide="mail" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Email Inquiry</p>
+                                    <p class="text-slate-700 text-sm font-medium mt-0.5">
+                                        solutions@wisecoretech.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map graphic mock -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 overflow-hidden shadow-sm space-y-3 relative group">
+                        <div class="absolute inset-0 bg-blue-600/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center pointer-events-none">
+                            <span class="bg-slate-900/90 text-white text-xs font-semibold py-1.5 px-3 rounded-lg shadow-lg flex items-center gap-1">
+                                <i data-lucide="sparkles" class="h-3 w-3 text-cyan-400"></i> HQ Silicon Valley location
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-semibold text-slate-600 flex items-center gap-1.5">
+                                <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+                                Interactive Headquarters Map
+                            </span>
+                            <span class="text-slate-400 font-mono text-[10px]">94025 GPS Coordinates</span>
+                        </div>
+
+                        <!-- Map illustration canvas -->
+                        <div class="bg-slate-100 h-44 rounded-xl border border-slate-200 relative overflow-hidden flex justify-center items-center">
+                            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:12px_12px]"></div>
+                            
+                            <div class="absolute top-1/2 left-0 right-0 h-[8px] bg-slate-200"></div>
+                            <div class="absolute left-1/3 top-0 bottom-0 w-[8px] bg-slate-200"></div>
+                            <div class="absolute left-2/3 top-0 bottom-0 w-[6px] bg-slate-200 rotate-12"></div>
+
+                            <div class="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+                                <div class="relative">
+                                    <div class="h-10 w-10 bg-blue-600/30 rounded-full animate-ping absolute -top-1 -left-1"></div>
+                                    <div class="h-8 w-8 bg-blue-600 text-white rounded-full flex justify-center items-center shadow-lg relative z-10">
+                                        <i data-lucide="layers" class="h-4 w-4"></i>
+                                    </div>
+                                </div>
+                                <span class="bg-slate-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow mt-1">
+                                    WiseCore
+                                </span>
+                            </div>
+
+                            <div class="absolute left-2/3 top-1/4 h-2.5 w-2.5 rounded-full bg-slate-400 border border-white"></div>
+                            <div class="absolute left-1/5 top-3/4 h-2.5 w-2.5 rounded-full bg-slate-400 border border-white"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right contact form with feedback states -->
+                <div class="lg:col-span-7 bg-slate-50 border border-slate-200/60 p-8 rounded-3xl shadow-sm">
+                    <div id="form-success-container" class="hidden h-full min-h-[350px] flex flex-col justify-center items-center text-center space-y-4 py-8 animate-pulse">
+                        <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-50 text-emerald-500 shadow-md">
+                            <i data-lucide="check-circle-2" class="h-10 w-10"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-slate-900 tracking-tight">Thank you!</h3>
+                        <p class="text-slate-600 text-sm max-w-sm">
+                            Your digital roadmap inquiry has been received. One of our Senior Technology Partners will contact you within 2 working business hours.
+                        </p>
+                        <button onclick="resetContactForm()" class="text-xs text-blue-600 hover:text-blue-500 font-semibold underline pt-2">
+                            Submit another inquiry
+                        </button>
+                    </div>
+
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="space-y-1.5">
+                                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider" for="form-name">
+                                    Full Name <span class="text-red-500">*</span>
+                                </label>
+                                <input id="form-name" type="text" placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition">
+                                <p id="err-name" class="text-red-500 text-[11px] font-medium hidden"></p>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-xs font-bold text-slate-600 uppercase tracking-wider" for="form-email">
+                                    Email Address <span class="text-red-500">*</span>
+                                </label>
+                                <input id="form-email" type="email" placeholder="john@company.com" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition">
+                                <p id="err-email" class="text-red-500 text-[11px] font-medium hidden"></p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-600 uppercase tracking-wider" for="form-subject">
+                                Subject <span class="text-red-500">*</span>
+                            </label>
+                            <input id="form-subject" type="text" placeholder="e.g. Cloud Migrations and API Engineering" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition">
+                            <p id="err-subject" class="text-red-500 text-[11px] font-medium hidden"></p>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-600 uppercase tracking-wider" for="form-message">
+                                Project Goals & Message <span class="text-red-500">*</span>
+                            </label>
+                            <textarea id="form-message" rows="5" placeholder="Describe your workflows, goals, and legacy systems..." class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition"></textarea>
+                            <p id="err-message" class="text-red-500 text-[11px] font-medium hidden"></p>
+                        </div>
+
+                        <button id="submit-btn" type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-blue-500/10 transition flex justify-center items-center gap-2">
+                            <span>Submit Project Inquiry</span>
+                            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs sm:text-sm py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+            
+            <!-- Brand Column -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-lg text-white">
+                        <i data-lucide="layers" class="h-4 w-4"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg text-white">
+                        Wise<span class="text-blue-400">Core</span>
+                    </span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    WiseCore Solutions delivers elite enterprise technologies designed to securely modernise digital architectures. We help brands build the systems of tomorrow, today.
+                </p>
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="#" class="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white flex justify-center items-center transition" aria-label="Twitter">
+                        <span class="text-xs font-bold">T</span>
+                    </a>
+                    <a href="#" class="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white flex justify-center items-center transition" aria-label="LinkedIn">
+                        <span class="text-xs font-bold">L</span>
+                    </a>
+                    <a href="#" class="h-8 w-8 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white flex justify-center items-center transition" aria-label="GitHub">
+                        <span class="text-xs font-bold">G</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-4">
+                <h4 class="font-display font-bold text-white text-xs uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#home" class="hover:text-white transition">Home Page</a></li>
+                    <li><a href="#about" class="hover:text-white transition">Company Story</a></li>
+                    <li><a href="#services" class="hover:text-white transition">What We Provide</a></li>
+                    <li><a href="#whyus" class="hover:text-white transition">Why Clients Choose Us</a></li>
+                    <li><a href="#testimonials" class="hover:text-white transition">Partner Endorsements</a></li>
+                </ul>
+            </div>
+
+            <!-- Services List -->
+            <div class="space-y-4">
+                <h4 class="font-display font-bold text-white text-xs uppercase tracking-wider">Core Services</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li>Custom Code Engineering</li>
+                    <li>Enterprise Cloud Migration</li>
+                    <li>Strategic IT Consulting</li>
+                    <li>SOC2 Security & Defenses</li>
+                    <li>Data Intelligence Pipelines</li>
+                    <li>Digital Process Automations</li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Form -->
+            <div class="space-y-4">
+                <h4 class="font-display font-bold text-white text-xs uppercase tracking-wider">WiseCore Newsletter</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Subscribe to stay updated with monthly digital transformation and security briefings.
+                </p>
+                <div class="flex gap-2">
+                    <input type="email" placeholder="news@company.com" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs w-full focus:outline-none focus:border-blue-500 text-white">
+                    <button onclick="alert('Subscription saved. Thank you!')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-lg font-bold transition shrink-0">Join</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+            <p class="text-slate-500 text-center sm:text-left">
+                © 2026 WiseCore Solutions LLC. All rights reserved. Built to specifications.
+            </p>
+            <div class="flex gap-4 text-slate-500">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <span>•</span>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 right-6 z-40 bg-blue-600 hover:bg-blue-500 text-white p-3.5 rounded-full shadow-xl shadow-blue-500/20 transition-all duration-300 hidden">
+        <i data-lucide="arrow-up" class="h-5 w-5 animate-pulse"></i>
+    </button>
+
+    <!-- Modal Form (Quote Request popup) -->
+    <div id="modal-container" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden justify-center items-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+            
+            <!-- Header -->
+            <div class="bg-slate-900 p-6 text-white flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="sparkles" class="h-5 w-5 text-blue-400"></i>
+                    <div>
+                        <h3 class="font-display font-bold text-lg leading-tight">Request an Enterprise Quote</h3>
+                        <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Custom scoping analysis in 2 business hours</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+
+            <!-- Content form -->
+            <div class="p-6 overflow-y-auto">
+                <div id="modal-success" class="hidden text-center py-10 space-y-4">
+                    <div class="inline-flex h-14 w-14 rounded-full bg-emerald-50 text-emerald-500 justify-center items-center shadow-inner">
+                        <i data-lucide="check" class="h-8 w-8 stroke-[3]"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-xl text-slate-900">Quote Request Submitted</h4>
+                    <p class="text-slate-600 text-sm max-w-md mx-auto">
+                        Thank you for submitting your project specs! Our lead solution architect has been notified and is reviewing your budget guidelines.
+                    </p>
+                </div>
+
+                <form id="modal-quote-form" onsubmit="handleModalSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Full Name</label>
+                            <input id="q-name" required type="text" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-100 rounded-lg px-3.5 py-2 text-sm" placeholder="Your Name">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Corporate Email</label>
+                            <input id="q-email" required type="email" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-100 rounded-lg px-3.5 py-2 text-sm" placeholder="you@company.com">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Selected Technology</label>
+                            <select id="q-service" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-100 rounded-lg px-3.5 py-2 text-sm text-slate-700">
+                                <option value="custom-software">Custom Software Dev</option>
+                                <option value="cloud-solutions">Cloud & DevOps Solutions</option>
+                                <option value="it-consulting">Strategic IT Consulting</option>
+                                <option value="cybersecurity">Cybersecurity & Compliance</option>
+                                <option value="data-analytics">Data Intelligence & Pipelines</option>
+                                <option value="digital-transformation">Digital Transformation</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Project Budget Estimate</label>
+                            <select id="q-budget" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-100 rounded-lg px-3.5 py-2 text-sm text-slate-700">
+                                <option value="under-$10k">Under $10,000</option>
+                                <option value="$10k-$25k">$10,000 - $25,000</option>
+                                <option value="$25k-$50k">$25,000 - $50,000</option>
+                                <option value="$50k+">$50,000 or more</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">System Bottlenecks & Specifications</label>
+                        <textarea id="q-details" rows="4" class="w-full bg-slate-50 border border-slate-200 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-100 rounded-lg px-3.5 py-2 text-sm" placeholder="Detail any target databases, legacy endpoints, or integration requirements..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl shadow transition mt-2 flex justify-center items-center gap-1.5">
+                        <i data-lucide="sparkles" class="h-4 w-4"></i>
+                        <span>Submit Budget Request</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- --- JAVASCRIPT AND LOGIC CODE --- -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Navbar Scroll Style Changer
+        const navbar = document.getElementById('navbar');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900/95', 'backdrop-blur-md', 'shadow-lg', 'py-3', 'border-slate-800');
+                navbar.classList.remove('py-5', 'border-transparent');
+            } else {
+                navbar.classList.add('py-5', 'border-transparent');
+                navbar.classList.remove('bg-slate-900/95', 'backdrop-blur-md', 'shadow-lg', 'py-3', 'border-slate-800');
+            }
+
+            // Back to top appearance
+            if (window.scrollY > 350) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+
+            // Scroll Spying to active section menu item highlighting
+            spyScroll();
+        });
+
+        // 2. Active Section Highlight Spying
+        function spyScroll() {
+            const sections = ['home', 'about', 'services', 'whyus', 'testimonials', 'contact'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = 'home';
+            for (const section of sections) {
+                const el = document.getElementById(section);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 120 && rect.bottom >= 120) {
+                        current = section;
+                        break;
+                    }
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-400');
+                link.classList.add('text-slate-300', 'hover:text-white');
+                const href = link.getAttribute('href');
+                if (href === '#' + current) {
+                    link.classList.remove('text-slate-300', 'hover:text-white');
+                    link.classList.add('text-blue-400');
+                }
+            });
+        }
+
+        function setActiveLink(clickedElement) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-400');
+                link.classList.add('text-slate-300', 'hover:text-white');
+            });
+            clickedElement.classList.add('text-blue-400');
+            clickedElement.classList.remove('text-slate-300', 'hover:text-white');
+        }
+
+        // 3. Hamburger Menu Sidebar Drawer controllers
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // 4. Statistics Counters Animation triggers on scroll viewport entry
+        const counters = [
+            { id: 'counter-years', target: 12 },
+            { id: 'counter-projects', target: 350 },
+            { id: 'counter-clients', target: 180 },
+            { id: 'counter-countries', target: 15 }
+        ];
+
+        let countersAnimated = false;
+        const statsContainer = document.getElementById('stats-container');
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !countersAnimated) {
+                countersAnimated = true;
+                animateAllCounters();
+            }
+        }, { threshold: 0.1 });
+
+        if (statsContainer) {
+            observer.observe(statsContainer);
+        }
+
+        function animateAllCounters() {
+            const duration = 1500; // ms
+            const steps = 50;
+            const stepDuration = duration / steps;
+            let currentStep = 0;
+
+            const interval = setInterval(() => {
+                currentStep++;
+                counters.forEach(counter => {
+                    const el = document.getElementById(counter.id);
+                    if (el) {
+                        const currentVal = Math.round((counter.target / steps) * currentStep);
+                        el.innerText = Math.min(counter.target, currentVal) + '+';
+                    }
+                });
+
+                if (currentStep >= steps) {
+                    clearInterval(interval);
+                    counters.forEach(counter => {
+                        const el = document.getElementById(counter.id);
+                        if (el) el.innerText = counter.target + '+';
+                    });
+                }
+            }, stepDuration);
+        }
+
+        // 5. Scroll triggers for general section reveals
+        const reveals = document.querySelectorAll('.reveal');
+        
+        window.addEventListener('scroll', () => {
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        });
+
+        // Trigger reveal for elements initially visible
+        window.dispatchEvent(new Event('scroll'));
+
+        // 6. Testimonial Carousel data and slider logic
+        const testimonials = [
+            {
+                quote: "WiseCore Solutions completely transformed our legacy supply chain. Their custom cloud architecture reduced our operational downtime by 98% and improved tracking transparency ten-fold. They are a partner in the truest sense.",
+                author: "Sarah Jenkins",
+                role: "Chief Technology Officer",
+                company: "LogiGlobal Logistics",
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+            },
+            {
+                quote: "Their cybersecurity audit was the most thorough we have ever experienced. WiseCore did not just hand us a PDF of vulnerabilities; they worked side-by-side with our developers to patch and verify every single gateway.",
+                author: "David Chen",
+                role: "VP of Engineering",
+                company: "FinTech Flow Inc.",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+            },
+            {
+                quote: "We struggled for years to integrate our regional POS databases. WiseCore built a unified data pipeline and dashboard in record time. Our executive leadership now makes real-time, data-driven inventory adjustments.",
+                author: "Elena Rostova",
+                role: "Director of Digital Strategy",
+                company: "RetailSphere Global",
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
+            }
+        ];
+
+        let activeIndex = 0;
+        const qText = document.getElementById('quote-text');
+        const qAuthor = document.getElementById('quote-author');
+        const qRole = document.getElementById('quote-role');
+        const qAvatar = document.getElementById('quote-avatar');
+
+        function updateTestimonialDisplay() {
+            // Apply a slight fade out transition
+            qText.style.opacity = 0;
+            qAuthor.parentElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                const item = testimonials[activeIndex];
+                qText.innerText = `"${item.quote}"`;
+                qAuthor.innerText = item.author;
+                qRole.innerHTML = `${item.role} — <span class="text-blue-600 font-semibold">${item.company}</span>`;
+                qAvatar.src = item.avatar;
+                qAvatar.alt = item.author;
+
+                // Update Dot styles
+                for (let i = 0; i < testimonials.length; i++) {
+                    const dot = document.getElementById(`dot-${i}`);
+                    if (dot) {
+                        if (i === activeIndex) {
+                            dot.classList.add('w-8', 'bg-blue-600');
+                            dot.classList.remove('w-2.5', 'bg-slate-300');
+                        } else {
+                            dot.classList.add('w-2.5', 'bg-slate-300');
+                            dot.classList.remove('w-8', 'bg-blue-600');
+                        }
+                    }
+                }
+
+                qText.style.opacity = 1;
+                qAuthor.parentElement.style.opacity = 1;
+            }, 200);
+        }
+
+        function nextTestimonial() {
+            activeIndex = (activeIndex + 1) % testimonials.length;
+            updateTestimonialDisplay();
+        }
+
+        function prevTestimonial() {
+            activeIndex = (activeIndex - 1 + testimonials.length) % testimonials.length;
+            updateTestimonialDisplay();
+        }
+
+        function jumpToTestimonial(index) {
+            activeIndex = index;
+            updateTestimonialDisplay();
+        }
+
+        // Auto rotation interval (every 7s)
+        let rotationTimer = setInterval(nextTestimonial, 7000);
+
+        // Clear timer on hover/navigation clicks for user control
+        const sliderContainer = document.getElementById('testimonials');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('mouseenter', () => clearInterval(rotationTimer));
+            sliderContainer.addEventListener('mouseleave', () => rotationTimer = setInterval(nextTestimonial, 7000));
+        }
+
+        // 7. Contact Form submission validation logic
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            
+            const nameInp = document.getElementById('form-name');
+            const emailInp = document.getElementById('form-email');
+            const subjectInp = document.getElementById('form-subject');
+            const msgInp = document.getElementById('form-message');
+
+            const errName = document.getElementById('err-name');
+            const errEmail = document.getElementById('err-email');
+            const errSubject = document.getElementById('err-subject');
+            const errMessage = document.getElementById('err-message');
+
+            let isValid = true;
+
+            // Reset error displays
+            [errName, errEmail, errSubject, errMessage].forEach(el => {
+                el.classList.add('hidden');
+                el.innerText = '';
+            });
+            [nameInp, emailInp, subjectInp, msgInp].forEach(inp => {
+                inp.classList.remove('border-red-500', 'ring-1', 'ring-red-100');
+            });
+
+            // Check name
+            if (!nameInp.value.trim()) {
+                errName.innerText = 'Full name is required.';
+                errName.classList.remove('hidden');
+                nameInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            }
+
+            // Check email
+            if (!emailInp.value.trim()) {
+                errEmail.innerText = 'Email address is required.';
+                errEmail.classList.remove('hidden');
+                emailInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            } else if (!/\S+@\S+\.\S+/.test(emailInp.value)) {
+                errEmail.innerText = 'Please enter a valid email address.';
+                errEmail.classList.remove('hidden');
+                emailInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            }
+
+            // Check subject
+            if (!subjectInp.value.trim()) {
+                errSubject.innerText = 'Subject is required.';
+                errSubject.classList.remove('hidden');
+                subjectInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            }
+
+            // Check message
+            if (!msgInp.value.trim()) {
+                errMessage.innerText = 'Message details are required.';
+                errMessage.classList.remove('hidden');
+                msgInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            } else if (msgInp.value.length < 10) {
+                errMessage.innerText = 'Message must be at least 10 characters long.';
+                errMessage.classList.remove('hidden');
+                msgInp.classList.add('border-red-500', 'ring-1', 'ring-red-100');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Simulate form submission visual feedback
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin mr-2"></span> Verifying form...`;
+
+            setTimeout(() => {
+                document.getElementById('contact-form').classList.add('hidden');
+                const successContainer = document.getElementById('form-success-container');
+                successContainer.classList.remove('hidden');
+                
+                // Reset submit button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Submit Project Inquiry</span> <i data-lucide="arrow-right" class="h-4 w-4"></i>`;
+                lucide.createIcons();
+            }, 1200);
+        }
+
+        function resetContactForm() {
+            document.getElementById('form-success-container').classList.add('hidden');
+            const form = document.getElementById('contact-form');
+            form.reset();
+            form.classList.remove('hidden');
+        }
+
+        // 8. Quote Request Popup Modals
+        const modalContainer = document.getElementById('modal-container');
+        const modalQuoteForm = document.getElementById('modal-quote-form');
+        const modalSuccess = document.getElementById('modal-success');
+
+        function openModal(type, preSelectedService) {
+            modalContainer.classList.remove('hidden');
+            modalContainer.classList.add('flex');
+            
+            if (preSelectedService) {
+                const serviceSelect = document.getElementById('q-service');
+                if (serviceSelect) serviceSelect.value = preSelectedService;
+            }
+        }
+
+        function closeModal() {
+            modalContainer.classList.add('hidden');
+            modalContainer.classList.remove('flex');
+            modalSuccess.classList.add('hidden');
+            modalQuoteForm.classList.remove('hidden');
+        }
+
+        // Close modal on outer clicks
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                closeModal();
+            }
+        });
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            
+            // Collect mock data and submit
+            modalQuoteForm.classList.add('hidden');
+            modalSuccess.classList.remove('hidden');
+            
+            setTimeout(() => {
+                closeModal();
+                modalQuoteForm.reset();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

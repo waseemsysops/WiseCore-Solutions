@@ -1,0 +1,6 @@
+{
+  "name": "WiseCore Solutions",
+  "description": "A premium, modern single-page website for WiseCore Solutions, a technology consulting and software solutions company.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
